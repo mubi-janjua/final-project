@@ -38,6 +38,12 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
+userSchema.virtual('Companys', {
+    ref: 'Company',
+    localField: '_id',
+    foreignField: 'admin'
+})
+
 userSchema.virtual('customers', {
     ref: 'Customer',
     localField: '_id',

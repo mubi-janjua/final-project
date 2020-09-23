@@ -20,8 +20,8 @@ router.post('/customers/new', auth, async(req, res)=> {
 
 router.get('/customers', auth, async(req, res)=>{
     try{
-         await req.user.populate('customers').execPopulate()
-         res.status(302).send(req.user.customers)
+        await req.user.populate('customers').execPopulate()
+        res.status(302).send(req.user.customers)
     } catch (e){
         res.status(400).send(e)
     }

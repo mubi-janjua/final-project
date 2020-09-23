@@ -16,14 +16,21 @@ const companySchema = new mongoose.Schema({
         required: true
     },
     state:{
-        type: String
+        type: String,
+        default: 'nill'
     },
     country:{
         type: String,
-        required: true
+        required: true,
+        default: 'Pakistan'
     },
     cell:{
         type: String
+    },
+    admin:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     }
 
 }, {
