@@ -37,6 +37,12 @@ const companySchema = new mongoose.Schema({
     timestamps: true
 })
 
+companySchema.virtual('Sales', {
+    ref: 'Sale',
+    localField: '_id',
+    foreignField: 'companyId'
+})
+
 companySchema.virtual('Feeds', {
     ref: 'Feed',
     localField: '_id',

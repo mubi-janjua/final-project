@@ -30,5 +30,12 @@ customerSchema = new mongoose.Schema({
      timestamps: true
 })
 
+
+customerSchema.virtual('Purchases', {
+    ref: 'Purchase',
+    localField: '_id',
+    foreignField: 'customerId'
+})
+
 const Customer = mongoose.model('Customer', customerSchema)
 module.exports = Customer
