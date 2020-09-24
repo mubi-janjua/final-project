@@ -37,5 +37,11 @@ const companySchema = new mongoose.Schema({
     timestamps: true
 })
 
+companySchema.virtual('Feeds', {
+    ref: 'Feed',
+    localField: '_id',
+    foreignField: 'companyId'
+})
+
 const Company = mongoose.model('Company', companySchema)
 module.exports = Company
