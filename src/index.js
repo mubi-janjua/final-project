@@ -8,6 +8,7 @@ const Company = require('./models/company')
 const Feed = require('./models/feedpurchase')
 const Sale = require('./models/sale')
 const Purchase = require('./models/purchase')
+const Medicine = require('./models/medicine')
 
 //router call
 const userRouter = require('./router/user')
@@ -16,6 +17,7 @@ const companyRouter = require('./router/company')
 const feedRouter = require('./router/feedpurchase')
 const saleRouter = require('./router/sale')
 const purchaseRouter = require('./router/purchase')
+const medicineRouter = require('./router/medicine')
 
 const app = express()
 const port = 3000
@@ -27,6 +29,7 @@ app.use(companyRouter)
 app.use(feedRouter)
 app.use(saleRouter)
 app.use(purchaseRouter)
+app.use(medicineRouter)
 
 app.listen(port, ()=>{
     console.log('port started:' + port)
