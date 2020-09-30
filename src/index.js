@@ -22,7 +22,7 @@ const medicineRouter = require('./router/medicine')
 const expenseRouter = require('./router/expense')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 app.use(express.json())
 app.use(userRouter)
