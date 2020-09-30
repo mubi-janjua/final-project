@@ -7,7 +7,7 @@ router.post('/medicines/new', async(req,res)=>{
     try{
         const medicine = new Medicine(req.body)
         await medicine.save()
-        res.status(200).send(medicine)
+        res.status(201).send(medicine)
     } catch(e){
         res.status(400).send(e)
     }
@@ -39,7 +39,7 @@ router.patch('/medicines/update/:id', async (req, res)=>{
     const isValidationOperation = updates.every((update)=>allowedUpdate.includes(update))
 
     if(!isValidationOperation){
-        res.status(404).send('Invalid Update')
+        res.status(401).send('Invalid Update')
     }
     try{
         const medicine = await Medicine.findByIdAndUpdate(req.params.id)

@@ -34,7 +34,7 @@ router.get('/customers/:id', auth, async(req, res)=> {
         //  const customer = await Customer.findById(_id)
         const customer = await Customer.findOne({_id, owner: req.user._id})
         if(!customer){
-            res.status(400).send()
+            res.status(404).send()
         }
          res.status(302).send(customer)      
     } catch (e) {
@@ -48,7 +48,7 @@ router.patch('/customers/:id', auth, async(req, res)=>{
     const isValidationOperation = updates.every((update)=> allowedUpdate.includes(update))
 
     if(!isValidationOperation){
-        res.status(400).send('Invalid Update')
+        res.status(401).send('Invalid Update')
     }
      
     try{
@@ -64,7 +64,7 @@ router.patch('/customers/:id', auth, async(req, res)=>{
         res.status(200).send(customer)
 
     } catch (e) {
-        res.status(404).send(e)
+        res.status(400).send(e)
     }
 
 })
@@ -76,7 +76,7 @@ router.delete('/customers/:id', auth, async(req,res)=>{
         }
         res.status(200).send(customer)
     } catch (e) {
-        res.status(404).send(e)
+        res.status(400).send(e)
     }
 })
 module.exports = router

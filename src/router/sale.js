@@ -7,7 +7,7 @@ router.post('/sales/new', async(req,res)=>{
     const sale = new Sale(req.body)
     try{
         await sale.save()
-        res.status(200).send(sale)
+        res.status(201).send(sale)
     } catch (e){
         res.status(400).send(e)
     }
@@ -42,7 +42,7 @@ router.patch('/sales/update/:id', async(req, res)=>{
     const isValidationOperation = updates.every((update)=> allowedUpdate.includes(update))
     
     if(!isValidationOperation){
-        res.status(404).send('Invalid Update')
+        res.status(401).send('Invalid Update')
     }
 
     try{

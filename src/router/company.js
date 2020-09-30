@@ -11,7 +11,7 @@ router.post('/companys/registration', auth, async(req, res)=> {
            ...req.body,
            admin: req.user._id
        })
-    // const company = new Company(req.body)
+
     try{
         await company.save()
         res.status(201).send(company)
@@ -36,7 +36,7 @@ router.get('/companys/:id', auth, async(req, res)=> {
     try{
         const company = await Company.findOne({_id, admin: req.user._id})
         if(!company){
-            res.status(400).send()
+            res.status(404).send()
         }
          res.status(302).send(company)      
     } catch (e) {
@@ -50,20 +50,20 @@ router.patch('/companys/update/:id', auth, async(req, res)=>{
   const isValidationOperation = updates.every((update)=> allowedUpdate.includes(update))
 
   if(!isValidationOperation){
-      res.status(400).send('Invalid Update')
+      res.status(401).send('Invalid Update')
   }
    
   try{
       const company = await Company.findOne({_id: req.params.id, admin: req.user.id})
 
       if(!company){
-          res.send(400).send()
+          res.send(404).send()
       }
       updates.forEach((update)=> company[update] = req.body[update])
       await company.save()
       res.status(200).send(company)
   } catch (e) {
-      res.status(404).send(e)
+      res.status(400).send(e)
   }
 
 })

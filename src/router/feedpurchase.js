@@ -7,7 +7,7 @@ router.post('/feeds/new', async(req, res)=>{
     const feed =  new Feed(req.body)
     try{
         await feed.save()
-        res.status(200).send(feed)
+        res.status(201).send(feed)
     } catch(e) {
         res.status(400).send(e)
     }
@@ -41,7 +41,7 @@ router.patch('/feeds/update/:id', async(req,res)=>{
    const isValidationOperation = updates.every((update)=> allowedUpdate.includes(update))
    
    if(!isValidationOperation){
-       res.status(404).send('Invalid Update')
+       res.status(401).send('Invalid Update')
    }
 
    try{

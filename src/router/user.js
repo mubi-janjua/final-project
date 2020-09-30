@@ -64,7 +64,7 @@ router.get('/users/:id', async(req,res)=>{
     try{
         const user = await User.findById(_id)
         if(!user){
-            res.status(400).send()
+            res.status(404).send()
         }
 
         res.status(201).send(user)
@@ -79,7 +79,7 @@ router.patch('/users/:id', async(req,res)=>{
     const isValidationOperation = updates.every((update)=> allowedUpdate.includes(update))
 
     if(!isValidationOperation){
-        return res.status(400).send({error: 'Invalid Update'})
+        return res.status(401).send({error: 'Invalid Update'})
     }
 
     try{
@@ -89,12 +89,12 @@ router.patch('/users/:id', async(req,res)=>{
 
          await user.save()
          if(!user){
-             res.status(400).send()
+             res.status(404).send()
          }
 
          res.status(200).send(user)
     } catch (e) {
-        res.status(500).send(e)
+        res.status(400).send(e)
     }
 })
 
