@@ -37,3 +37,6 @@ app.use(expenseRouter)
 app.listen(port, ()=>{
     console.log('port started:' + port)
 })
+
+
+//db lines
